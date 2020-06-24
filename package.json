@@ -1,0 +1,29 @@
+{
+	"name": "mir_final",
+	"version": "1.0.0",
+	"description": "Author_TWcamel",
+	"main": "index.js",
+	"scripts": {
+		"serve": "npm run serve",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TWcamel/MIR_FINAL.git"
+	},
+	"keywords": [
+		"MIR",
+		"NTHU"
+	],
+	"author": "TWcamel",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/TWcamel/MIR_FINAL/issues"
+	},
+	"homepage": "https://github.com/TWcamel/MIR_FINAL#readme",
+	"devDependencies": {
+		"abcjs": "^5.12.0",
+		"font-awesome": "^4.7.0",
+		"prettier": "2.0.5"
+	}
+}
