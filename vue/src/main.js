@@ -1,14 +1,13 @@
+/**
+ * @file vue 主入口
+ * @author wangyisheng@baidu.com (wangyisheng)
+ */
+
 import Vue from 'vue'
-import App from './App.vue'
-import VueRouter from 'vue-router'
-import {routes} from './router'
 
-Vue.use(VueRouter);
-
-const router = new VueRouter({
-  routes,
-  mode: 'history'
-});
+import App from './App'
+import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false
 
@@ -25,7 +24,8 @@ router.beforeEach((to, from, next)=>{
 });
 
 new Vue({
+  el: '#app',
   router,
-  render: h => h(App),
-}).$mount('#app');
-
+  store,
+  render: h => h(App)
+})

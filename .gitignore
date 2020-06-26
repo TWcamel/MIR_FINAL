@@ -1,2 +1,7 @@
-/node_modules
-mir_f/node_modules
+.DS_Store
+node_modules
+vue-dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.nyc_output

@@ -6,6 +6,10 @@
         By logging in you agree to the ridiculously long terms that you didn't
         bother to read.
       </p>
+      <div>
+        <!-- <h1 id="Bcaptcha">Captcha</h1> -->
+        <p id="captcha"></p>
+      </div>
     </div>
     <div id="form">
       <form @submit.prevent="login">
@@ -18,56 +22,76 @@
           autocomplete="off"
         />
         <label for="password">Password</label>&nbsp;
-        <i
-          class="fas"
-          :class="[passwordIcon]"
-          @click="hidePassword = !hidePassword"
-        ></i>
-        <input
-          :type="passwordType"
-          id="password"
-          v-model="password"
-          placeholder="**********"
-        />
+        <i class="fas" :class="[passwordIcon]" @click="hidePassword = !hidePassword"></i>
+        <input :type="passwordType" id="password" v-model="password" placeholder="**********" />
+        <label for="captcha">Captcha &nbsp</label>&nbsp;
+        <input type="text" id="captcha" v-model="captchaPwd" placeholder="(Empty)" />
         <button type="submit">Log in</button>
       </form>
+      <button @click="getUsrPwdAndCaptcha()">Get Captcha</button>
     </div>
-		<div id="captcha">
-		</div>
   </div>
 </template>
 <script>
-// import Home from './Home.vue'
-import abcjs from 'abcjs'
-
+// import Index from "../pages/Index.vue";
+import abcjs from "abcjs";
+import { get } from "../utils/request";
+import { getRandInt, abcSetter, abcGetter } from "../utils/utils";
+import { captchaGen } from "../utils/captchaGen";
+let getTune = [];
 export default {
-		mounted:  function () {
-			abcjs.renderAbc("daptcha", this.tune, { add_classes: true, clickListener: this.listener });
-		},
-  data() {
-    return {
-      userName: '',
-      password: '',
-      hidePassword: true,
-    }
-  },
   computed: {
     passwordType() {
-      return this.hidePassword ? 'password' : 'text'
+      return this.hidePassword ? "password" : "text";
     },
     passwordIcon() {
-      return this.hidePassword ? 'fa-eye' : 'fa-eye-slash'
+      return this.hidePassword ? "fa-eye" : "fa-eye-slash";
     }
   },
   methods: {
     login() {
-      if (this.userName === 'qq' && this.password === 'qq') {
-        localStorage.setItem('token', 'ImLogin')
-        this.$router.push('/')
-			} else alert('login failed')
-		}
+      if (
+        this.userName === localStorage.getItem("userName") &&
+        this.password === localStorage.getItem("passwd") &&
+        this.captchaPwd === localStorage.getItem("captcha")
+      ) {
+        localStorage.setItem("token", "ImLogin");
+        this.$router.push("/");
+      } else alert("login failed");
+    },
+    async getUsrPwdAndCaptcha() {
+      try {
+        let rnd = getRandInt(3);
+        let result = await get("/api/captcha", {
+          params: {
+            cap: rnd,
+            ans: rnd,
+            abc: rnd
+          }
+        });
+        console.log(result);
+        localStorage.setItem("userName", result.usr);
+        localStorage.setItem("passwd", result.pwd);
+        localStorage.setItem("captcha", result.ans);
+        getTune = [result.tune, result.ans];
+        abcSetter(result.abc);
+        abcjs.renderAbc("captcha", `${getTune[1]}`, {});
+        console.log(localStorage.getItem("captcha", result.ans));
+      } catch (e) {
+        console.log(e);
+        alert("Cannot Get User and Password");
+      }
+    }
+  },
+  data() {
+    return {
+      userName: "",
+      password: "",
+      captchaPwd: "",
+      hidePassword: true
+    };
   }
-}
+};
 </script>
 
 <style scoped>
@@ -91,7 +115,7 @@ div#app div#login div#description {
   padding: 35px;
 }
 
-div#app div#login div#description h1,
+div#app div#login div#description,
 div#app div#login div#description p {
   margin: 0;
 }
@@ -142,6 +166,7 @@ div#app div#login div#form button {
   padding: 10px;
   transition: background-color 0.2s ease-in-out;
   width: 100%;
+  margin-top: 1em;
 }
 
 div#app div#login div#form button:hover {
@@ -173,5 +198,11 @@ div#app div#login div#form button:hover {
     max-width: 280px;
     width: 100%;
   }
+}
+</style>
+
+<style scoped>
+#Bcaptcha {
+  margin-top: 1em;
 }
 </style>

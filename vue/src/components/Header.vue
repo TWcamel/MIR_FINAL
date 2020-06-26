@@ -1,6 +1,7 @@
 <template>
   <div>
-    <router-link to="/">Home</router-link>
+    <router-link to="/">Index</router-link>
+    <router-link to="/Home">Music Sheet</router-link>
     <router-link to="/userInfo">User Info</router-link>
     <a href="" @click.prevent="logout">Logout</a>
   </div>
