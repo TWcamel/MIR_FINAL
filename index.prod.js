@@ -35,10 +35,10 @@ async function registerApp () {
 
     app.listen(PORT);
 
-    log.info('生产环境服务器启动于端口号', PORT);
+    log.info('Production has been started at port:', PORT);
   } catch (e) {
     log.error(e)
-    log.error('生产环境服务器启动失败\n\n')
+    log.error('Fail to start prod env\n\n')
   }
 }
 
@@ -46,7 +46,7 @@ async function registerRoutes () {
   return new Promise((resolve, reject) => {
     glob('actions/**/*.js', (err, files) => {
       if (err) {
-        log.error('读取 actions 失败')
+        log.error('Fail to read actions file')
         log.error(err)
         reject()
         return
@@ -55,7 +55,7 @@ async function registerRoutes () {
       files.forEach(actionPath => {
         let action = require(`./${actionPath}`)
         if (typeof action.handler !== 'function') {
-          log.warn(actionPath, '不是一个合法的 action，已经跳过')
+          log.warn(actionPath, '(ignore warm) action files should includes handler and must be function type!')
           return
         }
         if (!action.routerPath) {
@@ -73,7 +73,7 @@ async function registerMiddlewares () {
   return new Promise((resolve, reject) => {
     glob('middlewares/**/*.js', (err, files) => {
       if (err) {
-        log.error('读取 middlewares 失败')
+        log.error('fail to read middlewares file')
         log.error(err)
         reject()
         return
