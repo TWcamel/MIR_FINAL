@@ -1,6 +1,6 @@
 # How?
 
-* `npm run dev` - start server at `localhost:8300` (can be modified at .conf files).
+* `npm run dev` - start server at `localhost:8300` (can be modified at `config/server.js`).
 
 * `npm run build` - producte Vue files to `/vue-dist`.
 
