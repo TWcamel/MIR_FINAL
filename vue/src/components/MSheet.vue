@@ -1,5 +1,5 @@
 <template>
-  <div id="homePage">
+  <div id="MusicSheetPage">
     <h1>This is full capcha's Demo</h1>
     <div class="output">
       Output

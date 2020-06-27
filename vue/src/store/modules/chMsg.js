@@ -1,8 +1,3 @@
-/**
- * @file 示例 vuex 模块
- * @author wangyisheng@baidu.com (wangyisheng)
- */
-
 import {get} from '../../utils/request'
 
 const state = {
@@ -19,17 +14,12 @@ const mutations = {
 
 const actions = {
   initMessage ({commit}) {
-    commit('setMessage', 'Initial Message')
+    commit('setMessage', 'Press below button to get training results')
   },
 
   async getNewMessage ({commit}) {
-    let result = await get('/api/example', {
-      params: {
-        a: 1,
-        b: 2
-      }
-    })
-    commit('setMessage', result.message)
+    let result = await get('/api/files')
+    commit('setMessage', result.data)
     console.log(result)
   }
 }

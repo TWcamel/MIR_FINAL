@@ -1,15 +1,10 @@
-/**
- * @file 路由主入口，定义路由规则
- * @author wangyisheng@baidu.com (wangyisheng)
- */
-
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Index from '@/pages/Index.vue'
-import Detail from '@/pages/Detail.vue'
+import TModel from '@/pages/TModel.vue'
+// import Detail from '@/pages/Detail.vue'
 import Login from '@/components/Login.vue';
-import Home from '@/components/Home.vue';
+import MSheet from '@/components/MSheet.vue';
 import UserInfo from '@/components/UserInfo.vue';
 import Header from '@/components/Header.vue';
 
@@ -24,23 +19,18 @@ export default new Router({
       path: '/',
       name: 'index',
       components: {
-        default:Index,
+        default:MSheet,
         nav:Header
       }
-    },
-    {
-      path: '/detail/:id',
-      name: 'detail',
-      component: Detail
     },
     {
       path: '/login',
       component: Login
     },
     {
-      path: '/home',
+      path: '/MusicSheet',
       components: {
-        default: Home,
+        default: TModel,
         nav: Header
       }
     },
@@ -55,7 +45,6 @@ export default new Router({
       path: '*',
       redirect: '/'
     }
-
 
   ]
 })

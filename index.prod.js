@@ -1,8 +1,3 @@
-/**
- * @file 生产环境主入口
- * @author wangyisheng@baidu.com (wangyisheng)
- */
-
 const Koa = require('koa')
 const Router = require('koa-router')
 const glob = require('glob')
@@ -26,14 +21,11 @@ async function registerApp () {
   })
 
   try {
-    // node 端中间件和路由
     await registerMiddlewares();
     await registerRoutes();
     app.use(router.routes());
     app.use(router.allowedMethods());
 
-    // 前端(vue)路由
-    // 所有 navigate 请求重定向到 '/index.html'，配合底下的 koaStatic，实际位置位于 vue-dist/index.html
     app.use(history({
         htmlAcceptHeaders: ['text/html'],
         index: '/index.html'
