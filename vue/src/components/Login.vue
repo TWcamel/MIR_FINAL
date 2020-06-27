@@ -37,7 +37,6 @@
 import abcjs from "abcjs";
 import { get } from "../utils/request";
 import { getRandInt, abcSetter, abcGetter } from "../utils/utils";
-import { captchaGen } from "../utils/captchaGen";
 let getTune = [];
 export default {
   computed: {

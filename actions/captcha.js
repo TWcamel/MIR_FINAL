@@ -40,19 +40,18 @@ d4a2 a2f2d2|c4e2 e2c2A2|d4a2 a2f2d2|A2F2A2 B4A2|d2f2a2 a2f2d2|c2d2e2 e2c2A2|B2c2
 `
 }
 
-
 module.exports = {
   async handler(ctx, next) {
     let query = ctx.query
-    if (query['cap']==='0'){
+    if (query['cap'] === '0') {
       query['cap'] = [`tune0`]
       query['ans'] = [`BAFA D2 FA`]
       query['abc'] = tuneArr[`tune${query['abc']}`]
-    } else if (query['cap']==='1'){
+    } else if (query['cap'] === '1') {
       query['cap'] = [`tune1`]
       query['ans'] = [`AAAf2f`]
       query['abc'] = tuneArr[`tune${query['abc']}`]
-    } else if (query['cap']==='2'){
+    } else if (query['cap'] === '2') {
       query['cap'] = [`tune2`]
       query['ans'] = [`d4A2 A2F2A2`]
       query['abc'] = tuneArr[`tune${query['abc']}`]

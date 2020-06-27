@@ -5,3 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .nyc_output
+
+# public files
+public/uploads/SMC
+public/uploads/*.txt
+public/uploads/__pycache__

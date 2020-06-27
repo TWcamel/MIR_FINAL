@@ -1,8 +1,3 @@
-/**
- * @file 生产环境主入口
- * @author wangyisheng@baidu.com (wangyisheng)
- */
-
 const Koa = require('koa')
 const Router = require('koa-router')
 const glob = require('glob')
@@ -26,14 +21,11 @@ async function registerApp () {
   })
 
   try {
-    // node 端中间件和路由
     await registerMiddlewares();
     await registerRoutes();
     app.use(router.routes());
     app.use(router.allowedMethods());
 
-    // 前端(vue)路由
-    // 所有 navigate 请求重定向到 '/index.html'，配合底下的 koaStatic，实际位置位于 vue-dist/index.html
     app.use(history({
         htmlAcceptHeaders: ['text/html'],
         index: '/index.html'
@@ -43,10 +35,10 @@ async function registerApp () {
 
     app.listen(PORT);
 
-    log.info('生产环境服务器启动于端口号', PORT);
+    log.info('Production has been started at port:', PORT);
   } catch (e) {
     log.error(e)
-    log.error('生产环境服务器启动失败\n\n')
+    log.error('Fail to start prod env\n\n')
   }
 }
 
@@ -54,7 +46,7 @@ async function registerRoutes () {
   return new Promise((resolve, reject) => {
     glob('actions/**/*.js', (err, files) => {
       if (err) {
-        log.error('读取 actions 失败')
+        log.error('Fail to read actions file')
         log.error(err)
         reject()
         return
@@ -63,7 +55,7 @@ async function registerRoutes () {
       files.forEach(actionPath => {
         let action = require(`./${actionPath}`)
         if (typeof action.handler !== 'function') {
-          log.warn(actionPath, '不是一个合法的 action，已经跳过')
+          log.warn(actionPath, '(ignore warm) action files should includes handler and must be function type!')
           return
         }
         if (!action.routerPath) {
@@ -81,7 +73,7 @@ async function registerMiddlewares () {
   return new Promise((resolve, reject) => {
     glob('middlewares/**/*.js', (err, files) => {
       if (err) {
-        log.error('读取 middlewares 失败')
+        log.error('fail to read middlewares file')
         log.error(err)
         reject()
         return

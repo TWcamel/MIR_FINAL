@@ -1,8 +1,3 @@
-/**
- * @file webpack 配置
- * @author wangyisheng@baidu.com (wangyisheng)
- */
-
 const path = require('path')
 
 const HtmlwebpackPlugin = require('html-webpack-plugin')
@@ -65,8 +60,8 @@ let webpackConfig = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192, // 小于8k的图片自动转成base64格式
-              outputPath: 'images/' //图片打包后的文件夹
+              limit: 8192, 
+              outputPath: 'images/' 
             }
           }
         ]
@@ -74,10 +69,8 @@ let webpackConfig = {
     ]
   },
   plugins: [
-    // 处理 .vue
     new VueLoader(),
 
-    // 输出 index.html 到 output
     new HtmlwebpackPlugin({
       template: resolvePath('index.html')
     })
@@ -91,11 +84,9 @@ let webpackConfig = {
 
 if (isProd) {
   webpackConfig.plugins.push(
-    // 每次 build 清空 output 目录
     new CleanWebpackPlugin(resolvePath('../vue-dist'))
   )
   webpackConfig.plugins.push(
-    // 分离单独的 CSS 文件到 output
     new MiniCssExtractPlugin({
       filename: 'style.css',
     })
