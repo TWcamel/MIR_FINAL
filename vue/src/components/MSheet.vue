@@ -1,28 +1,36 @@
 <template>
-  <div id="MusicSheetPage">
-    <h1>This is full capcha's Demo</h1>
-    <div class="output">
-      Output
-      <div class="tune-number">
-        Tune Number:
-        <i>{{ tuneNumber }}</i>
-      </div>
-      <div class="classes">
-        Classes:
-        <i>{{ classes }}</i>
-      </div>
-      <div class="abcelem">
-        Struct returned from callback:
-        <br />
-        <i>{{ elem }}</i>
-      </div>
-    </div>
-    <p class="instructions">
-      Click around on the various parts of the sheet music and see what the
-      resultant output is.
-    </p>
-    <div id="paper">{{ tune }}</div>
-  </div>
+  <b-container>
+    <b-row cols="1">
+      <b-col id="MusicSheetPage">
+        <h1>This is full CAPTCHA's demo</h1>
+        <div class="output">
+          Output
+          <div class="tune-number">
+            Tune Number:
+            <i>{{ tuneNumber }}</i>
+          </div>
+          <div class="classes">
+            Classes:
+            <i>{{ classes }}</i>
+          </div>
+          <div class="abcelem">
+            Struct returned from callback:
+            <br />
+            <i>{{ elem }}</i>
+          </div>
+        </div>
+        <p class="instructions">
+          Click around on the various parts of the sheet music and see what the
+          resultant output is.
+        </p>
+      </b-col>
+    </b-row>
+    <b-row cols="1">
+      <b-col>
+        <div id="paper">{{ tune }}</div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

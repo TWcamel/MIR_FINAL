@@ -1,9 +1,17 @@
 <template>
-  <div class="index mb-4">
-    <h4 class="mb-2">{{ message }}</h4>
-    <b-button variant="outline-primary" @click="getNewMessage()" class="mb-4">Get Training Result</b-button>
-    <training-set></training-set>
-  </div>
+  <b-container>
+    <b-row cols="1">
+      <b-col class="index mb-4">
+        <h4 class="mb-2">{{ message }}</h4>
+        <b-button
+          variant="outline-primary" pill
+          @click="getNewMessage()"
+          class="mb-4"
+        >Get Training Result</b-button>
+        <training-set></training-set>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

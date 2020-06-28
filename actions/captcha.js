@@ -45,15 +45,15 @@ module.exports = {
     let query = ctx.query
     if (query['cap'] === '0') {
       query['cap'] = [`tune0`]
-      query['ans'] = [`BAFA D2 FA`]
+      query['ans'] = [`BAFA`]
       query['abc'] = tuneArr[`tune${query['abc']}`]
     } else if (query['cap'] === '1') {
       query['cap'] = [`tune1`]
-      query['ans'] = [`AAAf2f`]
+      query['ans'] = [`AAA`]
       query['abc'] = tuneArr[`tune${query['abc']}`]
     } else if (query['cap'] === '2') {
       query['cap'] = [`tune2`]
-      query['ans'] = [`d4A2 A2F2A2`]
+      query['ans'] = [`d4A2`]
       query['abc'] = tuneArr[`tune${query['abc']}`]
     }
     ctx.body = {

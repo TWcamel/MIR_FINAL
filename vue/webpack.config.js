@@ -60,12 +60,75 @@ let webpackConfig = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192, 
-              outputPath: 'images/' 
+              limit: 8192,
+              outputPath: 'images/'
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {
+          attributes: {
+            list: [
+              {
+                tag: 'img',
+                attribute: 'src',
+                type: 'src',
+              },
+              {
+                tag: 'img',
+                attribute: 'srcset',
+                type: 'srcset',
+              },
+              {
+                tag: 'img',
+                attribute: 'data-src',
+                type: 'src',
+              },
+              {
+                tag: 'img',
+                attribute: 'data-srcset',
+                type: 'srcset',
+              },
+
+              {
+                tag: 'link',
+                attribute: 'href',
+                type: 'src',
+                filter: (tag, attribute, attributes) => {
+                  if (!/stylesheet/i.test(attributes.rel)) {
+                    return false;
+                  }
+
+                  if (
+                    attributes.type &&
+                    attributes.type.trim().toLowerCase() !== 'text/css'
+                  ) {
+                    return false;
+                  }
+
+                  return true;
+                },
+              },
+              // More attributes
+            ],
+            urlFilter: (attribute, value, resourcePath) => {
+              // The `attribute` argument contains a name of the HTML attribute.
+              // The `value` argument contains a value of the HTML attribute.
+              // The `resourcePath` argument contains a path to the loaded HTML file.
+
+              if (/example\.pdf$/.test(value)) {
+                return false;
+              }
+
+              return true;
+            },
+            root: '.',
+          },
+        },
+      },
     ]
   },
   plugins: [

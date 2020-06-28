@@ -38,10 +38,10 @@ async function registerApp () {
 
     app.listen(PORT);
 
-    log.info('开发环境服务器启动于端口号', PORT, '等待 webpack 编译中，请稍候。\n\n');
+    log.info('Server env has been started at port:', PORT, 'wait for wabpack complie... \n\n');
   } catch (e) {
     log.error(e)
-    log.error('开发环境服务器启动失败\n\n')
+    log.error('Fail to start prod env\n\n')
   }
 }
 

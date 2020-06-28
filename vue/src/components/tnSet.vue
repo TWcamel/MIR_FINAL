@@ -1,11 +1,16 @@
 <template>
-  <div class="training-set">
-    <h4>Your training set now is 'SMC'</h4>
-    <!-- <button @click="getData()">Get Data</button> -->
-    <b-button variant="outline-secondary" @click="dryRun()">Try Run</b-button>
-  </div>
+  <b-container>
+    <b-row cols="1">
+      <b-col>
+        <div class="training-set">
+          <h4>Your training set now is 'SMC'</h4>
+          <!-- <button @click="getData()">Get Data</button> -->
+          <b-button variant="outline-secondary" pill @click="dryRun()">Try Run</b-button>
+        </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
-
 <script>
 import { get, post } from "../utils/request";
 export default {
@@ -22,7 +27,9 @@ export default {
     async dryRun() {
       try {
         await get("/api/run/");
-        alert('Your are now running SMC data set, plz wait 10sec until traiing process finished')
+        alert(
+          "Your are now running SMC data set, plz wait 10sec until traiing process finished"
+        );
       } catch (e) {
         alert("Cannot run python file, plz try again.");
       }

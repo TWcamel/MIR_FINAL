@@ -1,39 +1,56 @@
 <template>
-  <div id="login">
-    <div id="description">
-      <h1>Login</h1>
-      <p>
-        By logging in you agree to the ridiculously long terms that you didn't
-        bother to read.
-      </p>
-      <div>
-        <!-- <h1 id="Bcaptcha">Captcha</h1> -->
-        <p id="captcha"></p>
+  <b-container fuild="sm">
+    <b-row>
+      <b-col>
+        <div id="login">
+          <div id="description">
+            <h1>Login</h1>
+            <p>
+              By logging in you agree to the ridiculously long terms that you didn't
+              bother to read. Aditionally, CAPTCHA for loggin-validation will be shown, just press
+              <b
+                style="font-size:16px"
+              >Get CHAPTCHA</b> button below.
+            </p>
+            <div>
+              <p id="captcha"></p>
+            </div>
+          </div>
+          <div id="form">
+            <form @submit.prevent="login">
+              <label for="userName">Your Name</label>
+              <input
+                type="text"
+                id="userName"
+                v-model="userName"
+                placeholder="Donald Trump"
+                autocomplete="off"
+              />
+              <label for="password">Password</label>&nbsp;
+              <i class="fas" :class="[passwordIcon]" @click="hidePassword = !hidePassword"></i>
+              <input :type="passwordType" id="password" v-model="password" placeholder="**********" />
+              <label for="captcha">CAPTCHA &nbsp</label>&nbsp;
+              <input type="text" id="captcha" v-model="captchaPwd" placeholder="(Empty)" />
+              <b-button pill variant="outline-secondary" type="submit">Log in</b-button>
+              <b-button pill variant="outline-secondary" @click="getUsrPwdAndCaptcha()">Get CAPTCHA</b-button>
+            </form>
+          </div>
+        </div>
+      </b-col>
+    </b-row>
+    <b-modal ref="logginModal" hide-footer title="Welcome!">
+      <div class="d-block text-center">
+        <h3>About this website</h3>
       </div>
-    </div>
-    <div id="form">
-      <form @submit.prevent="login">
-        <label for="userName">Your Name</label>
-        <input
-          type="text"
-          id="userName"
-          v-model="userName"
-          placeholder="Donald Trump"
-          autocomplete="off"
-        />
-        <label for="password">Password</label>&nbsp;
-        <i class="fas" :class="[passwordIcon]" @click="hidePassword = !hidePassword"></i>
-        <input :type="passwordType" id="password" v-model="password" placeholder="**********" />
-        <label for="captcha">Captcha &nbsp</label>&nbsp;
-        <input type="text" id="captcha" v-model="captchaPwd" placeholder="(Empty)" />
-        <button type="submit">Log in</button>
-      </form>
-      <button @click="getUsrPwdAndCaptcha()">Get Captcha</button>
-    </div>
-  </div>
+      <p
+        class="mt-4"
+      >The verification code which named is CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart) is to deny the malicious registration of the registration robot designed by the software, and then generate a large number of spam users (zombie users) and the process of spam comment information input verification code.</p>
+      <p>In fact, the verification code combined with the number and alphabet have been cracked in these few years. So, we design a website with a new verification code by a music note. This website can show the complete the music sheet of the verification code, get the training result to train the model with a music dataset, and the analyzer upload the files that you want to analyze which can adjust the parameters by yourself.</p>
+      <b-button class="mt-3" variant="outline-danger" block @click="hideModalMethod">Close</b-button>
+    </b-modal>
+  </b-container>
 </template>
 <script>
-// import Index from "../pages/Index.vue";
 import abcjs from "abcjs";
 import { get } from "../utils/request";
 import { getRandInt, abcSetter, abcGetter } from "../utils/utils";
@@ -47,7 +64,16 @@ export default {
       return this.hidePassword ? "fa-eye" : "fa-eye-slash";
     }
   },
+  mounted: function() {
+    this.toggleModalMethod(); //method1 will execute at pageload
+  },
   methods: {
+    toggleModalMethod: function() {
+      this.$refs["logginModal"].show();
+    },
+    hideModalMethod() {
+      this.$refs["logginModal"].hide();
+    },
     login() {
       if (
         this.userName === localStorage.getItem("userName") &&
@@ -169,7 +195,7 @@ div#app div#login div#form button {
 }
 
 div#app div#login div#form button:hover {
-  background-color: #eeeeee;
+  background-color: #979797;
 }
 
 @media screen and (max-width: 600px) {
@@ -203,5 +229,8 @@ div#app div#login div#form button:hover {
 <style scoped>
 #Bcaptcha {
   margin-top: 1em;
+}
+p {
+  text-align: justify;
 }
 </style>
