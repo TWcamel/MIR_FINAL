@@ -94,7 +94,6 @@ export default {
             abc: rnd
           }
         });
-        console.log(result);
         localStorage.setItem("userName", result.usr);
         localStorage.setItem("passwd", result.pwd);
         localStorage.setItem("captcha", result.ans);

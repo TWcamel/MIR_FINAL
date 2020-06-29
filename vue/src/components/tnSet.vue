@@ -4,13 +4,13 @@
       <b-col>
         <div class="training-set">
           <h4>Your training set now is 'SMC'</h4>
-          <!-- <button @click="getData()">Get Data</button> -->
-          <b-button variant="outline-secondary" pill @click="dryRun()">Try Run</b-button>
+          <b-button  variant="outline-secondary" pill @click="dryRun()">Try Run</b-button>
         </div>
       </b-col>
     </b-row>
   </b-container>
 </template>
+
 <script>
 import { get, post } from "../utils/request";
 export default {
@@ -19,7 +19,7 @@ export default {
     async getData() {
       try {
         let resp = await get("/api/files/");
-        console.log(resp.data);
+        // console.log(resp.data);
       } catch (e) {
         alert("Cannot get data from data.txt, plz try again.");
       }
