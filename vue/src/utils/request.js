@@ -9,5 +9,3 @@ export async function post (url, options) {
   let response = await axios.post(url, options)
   return response.data
 }
-
-

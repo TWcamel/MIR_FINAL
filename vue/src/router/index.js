@@ -7,7 +7,7 @@ import Login from '@/components/Login.vue';
 import MSheet from '@/components/MSheet.vue';
 import UserInfo from '@/components/UserInfo.vue';
 import Header from '@/components/Header.vue';
-
+// import Analyzer from 'https://TWcamel.github.io/tmp-audio_vs/index.html'
 
 
 Vue.use(Router)
@@ -19,8 +19,8 @@ export default new Router({
       path: '/',
       name: 'index',
       components: {
-        default:MSheet,
-        nav:Header
+        default: MSheet,
+        nav: Header
       }
     },
     {
@@ -28,7 +28,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/MusicSheet',
+      path: '/TrainModel',
       components: {
         default: TModel,
         nav: Header
@@ -44,7 +44,12 @@ export default new Router({
     {
       path: '*',
       redirect: '/'
-    }
-
+    },
+    // {
+    //   path: '/Analyzer',
+    //   mode: history,
+    //   components: { template: Analyzer }
+    // },
   ]
+
 })
