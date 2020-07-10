@@ -45,7 +45,7 @@ $ npm i
 ## TODO
 - [x] Analyzer's page 
 - [x] train-model's component 
-- [ ] Rebuild Analyzer's page 
+- [x] Rebuild Analyzer's page 
 - [ ] Train Model on client's side
 - [ ] Beatfile tracker function
 =======
